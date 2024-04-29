@@ -14,7 +14,5 @@ starknet = "2.6.3"
 sierra = true
 allowed-libfuncs-list.name = "experimental"
 
-StarkiMarket = { path = "src/starki" }
-
 # Enable CASM codegen.
 casm = true

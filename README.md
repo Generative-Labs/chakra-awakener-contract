@@ -1,2 +1,2 @@
-# Starki-Contracts-Cairo
-The core contracts of Starki Marketplace, written by Cairo
+# ChakraAwakener-Contracts-Cairo
+Chakra Awakener is Chakra's first NFT collection. It is a commemorative NFT that celebrates the launch of the Chakra DevNet and is exclusively awarded to users who awaken the Chakra DevNet.
