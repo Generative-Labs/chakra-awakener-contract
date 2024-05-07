@@ -1,1 +1,0 @@
-{"version":1,"contracts":[{"id":"snblcal67gfbg","package_name":"chakra_awakener_contract","contract_name":"ChakraAwakener","module_path":"chakra_awakener_contract::chakra_awakener::ChakraAwakener","artifacts":{"sierra":"chakra_awakener_contract_ChakraAwakener.contract_class.json","casm":"chakra_awakener_contract_ChakraAwakener.compiled_contract_class.json"}}]}

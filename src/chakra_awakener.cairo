@@ -10,6 +10,10 @@ trait IChakraAwakener<TContractState> {
     fn symbol(self: @TContractState) -> felt252;
     fn token_uri(self: @TContractState, token_id: u256) -> Array<felt252>;
     fn tokenURI(self: @TContractState, tokenId: u256) -> Array<felt252>;
+    fn is_minted(self: @TContractState, user: ContractAddress) -> bool;
+    fn minted_count(self: @TContractState) -> u256;
+    fn set_mint_enable(ref self: TContractState, enable: bool);
+    fn mint_enable(self: @TContractState) -> bool;
 }
 
 #[starknet::contract]
@@ -60,7 +64,8 @@ mod ChakraAwakener{
         // merkle_root: felt252,
         white_list: LegacyMap<ContractAddress, bool>,
         minted: u256,
-        is_minted: LegacyMap<ContractAddress, bool>
+        is_minted: LegacyMap<ContractAddress, bool>,
+        mint_enable: bool
     }
 
     #[event]
@@ -128,6 +133,7 @@ mod ChakraAwakener{
         }
 
         fn mint(ref self: ContractState, minter: ContractAddress){
+            assert(self.mint_enable.read(), 'mint not enable');
             assert(self.white_list.read(minter), 'not in white list');
             assert(!self.is_minted.read(minter), 'ready minted');
             assert(self.minted.read() <= 888, 'total supply is 888');
@@ -155,6 +161,21 @@ mod ChakraAwakener{
             self.token_uri(tokenId)
         }
 
+        fn is_minted(self: @ContractState, user: ContractAddress) -> bool{
+            return self.is_minted.read(user);
+        }
+
+        fn minted_count(self: @ContractState) -> u256{
+            return self.minted.read();
+        }
+
+        fn set_mint_enable(ref self: ContractState, enable: bool){
+            self.ownable.assert_only_owner();
+            self.mint_enable.write(enable);
+        }
+        fn mint_enable(self: @ContractState) -> bool{
+            return self.mint_enable.read();
+        }
     }
 
     #[abi(embed_v0)]
